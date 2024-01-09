@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio10</title>
+    <style>
+        /* Estilos del reloj */
+        #reloj{
+            border: solid black 2px; /* Le agrego un borde negro */
+            padding: 2px; /* Relleno de 2 píxeles a cada lado */
+            text-align: center; /* Lo pongo en el centro de la pantalla */
+            font-size: 50px;  /* Tamaño de 50 píxeles */
+        }
+        /* Estilos del botón */
+        button{
+            font-size: 20px; /* Tamaño de 20 píxeles */
+        }
+        /* Estilos del botón al pasar el cursor por encima */
+        button:hover{
+            background-color: black; /* Fondo negro */
+            color: white; /* Color de letra blanco */
+            cursor:pointer; /* Cambia el cursor a una mano señalando */
+        }
+        /* Estilos del contenedor de todo */
+        .container{
+            display:flex; 
+            flex-direction: column; /* Para que salgan uno encima del otro */
+            align-items: center; /* Para que estén en el centro */
+            margin-top: 100px; /* Lo separamos un poco de arriba */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="reloj"></div>
+        <br>
+        <button onclick="configurarAlarma()">Configurar Alarma</button>
+    </div>
+    
+
+    <script>
+        function mostrarHoraActual() {
+            const ahora = new Date();
+            /* Hacemos constantes que sean una fecha recogiendo las horas, minutos y segundos,
+            pasándolos a cadena y haciendo que sean dos carácteres y si alguno no lo rellenas
+            se rellena solo con un cero. */
+            const horas = ahora.getHours().toString().padStart(2, '0');
+            const minutos = ahora.getMinutes().toString().padStart(2, '0');
+            const segundos = ahora.getSeconds().toString().padStart(2, '0');
+
+            /* Devolvemos la hora actual */
+            return `${horas}:${minutos}:${segundos}`;
+        }
+
+        function actualizarReloj() {
+            const relojElemento = document.getElementById('reloj');
+            /* Ponemos como contenido de texto la hora actual */
+            relojElemento.textContent = mostrarHoraActual();
+        }
+
+        function configurarAlarma() {
+            const horaAlarma = prompt('Introduce la hora de la alarma en formato HH:mm');
+            
+            /* Condicional para comprobar que la hora ha sido bien introducida */
+            if (!horaAlarma || !/^([01]\d|2[0-3]):([0-5]\d)$/.test(horaAlarma)) {
+                alert('Formato de hora incorrecto. Utiliza HH:mm (24 horas)');
+                return;
+            }
+
+            /* Separamos la hora introducida en hora y minutos y se lo ponemos a la variable alarma */
+            const [hora, minutos] = horaAlarma.split(':');
+            const alarma = new Date();
+            alarma.setHours(parseInt(hora, 10));
+            alarma.setMinutes(parseInt(minutos, 10));
+
+            /* Comprobamos cada segundo si ya es la hora de la alarma */
+            setInterval(() => comprobarAlarma(alarma), 1000);
+        }
+
+        function comprobarAlarma(alarma) {
+            const ahora = new Date();
+
+            /* Si ya es la hora te da la opción de descansar más */
+            if (ahora.getHours() === alarma.getHours() && ahora.getMinutes() === alarma.getMinutes()) {
+                const descansar = confirm('¡Es hora de despertarse rey!\n¿Quieres descansar un poco más?');
+
+                /* En caso de que se le de a que sí, se le añaden 2 minutos más */
+                if (descansar) {
+                    alarma.setMinutes(alarma.getMinutes() + 2);
+                    alert(`Descansa un poco más. Próxima alarma a las ${alarma.toLocaleTimeString()}`);
+                } else {
+                    alert('¡Despierta! Hora de levantarse.');
+                }
+            }
+        }
+
+        /* Hacemos que se actualice el reloj cada segundo */
+        setInterval(actualizarReloj, 1000);
+    </script>
+</body>
+</html>

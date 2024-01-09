@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio9</title>
+</head>
+<body>
+    <ul id="lista">
+        <li>Juan</li>
+        <li>Sergio</li>
+        <li>Enrique</li>
+        <li>Alba</li>
+        <li>Francisco</li>
+        <li>Diego</li>
+        <li>Maria</li>
+        <li>Carmen</li>
+        <li>Laura</li>
+        <li>Bea</li>
+    </ul>
+
+    <script>
+        /* Recogemos la lista a través de su id */
+        var lista = document.getElementById('lista');
+        /* Hacemos un array de los elementos que contiene la lista dentro */
+        var elementos = Array.from(lista.children);
+
+        var pregunta = prompt('¿Quieres ordenar la lista?');
+
+        if (pregunta === 'aceptar') {
+            /* Utilizamos sort para ordenar la lista */
+            elementos.sort((a, b) => a.textContent.localeCompare(b.textContent));
+            // Actualizamos el contenido de la lista con los elementos ordenados, eliminando la actual y reescribiéndola ya ordenada
+            lista.innerHTML = "";
+            elementos.forEach(elemento => lista.appendChild(elemento));
+        } else if (pregunta === 'cancelar') {
+            // Desordenamos aleatoriamente la lista
+            for (let i = elementos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                /* Intercambiamos los valores de i y j para que no se repitan nombres */
+                [elementos[i].textContent, elementos[j].textContent] = [elementos[j].textContent, elementos[i].textContent];
+            }
+            // Actualizamos el contenido de la lista con los elementos desordenados
+            lista.innerHTML = "";
+            elementos.forEach(elemento => lista.appendChild(elemento));
+        } else {
+            alert('Introdujiste un valor que no es adecuado. Pon aceptar o cancelar');
+        }
+    </script>
+</body>
+</html>
+

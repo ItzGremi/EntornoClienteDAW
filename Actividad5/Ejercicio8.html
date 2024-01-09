@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio8</title>
+    <!-- Estilos de la página web para que no sea tan sosa -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera de la página -->
+    <header>
+        <h1>Sergio Pérez Bermejo</h1>
+    </header>
+
+    <!-- Secciones para rellenar y poder hacer el scroll -->
+    <section>
+        <h2>Sección 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 4</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 5</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 6</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 7</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 8</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 9</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section>
+        <h2>Sección 10</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <section id="seccionFinal">
+        <h2>Sección 11</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (más contenido)</p>
+    </section>
+
+    <footer>
+        <p>Un destacable? 🌹😉 - © 2023</p>
+    </footer>
+
+    <script>
+        // Función para hacer scroll hacia la última sección después de 3 segundos
+        setTimeout(function() {
+            var ultimaSeccion = document.getElementById('seccionFinal');
+            ultimaSeccion.scrollIntoView({ behavior: 'smooth' });
+        }, 3000);
+    </script>
+</body>
+</html>

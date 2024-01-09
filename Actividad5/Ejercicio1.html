@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+    <p id="parrafo">Hola buenas tardes.</p>
+    <br>
+    <!-- Botón con el cual agregaremos estilos -->
+    <button onclick="cambiarEstilos()">Cambiar</button>
+    <script>
+        /* Variable que servirá para que el botón actúe de una forma u otra, es decir, para agregar los estilos o quitarlos */
+        var botonPresionado = false;
+        
+        function cambiarEstilos(){
+            /* Recojo en una variable texto el id parrafo */
+            var texto = document.getElementById('parrafo');
+            /* Si no está presionado el botón agrega estilos */
+            if (!botonPresionado) {
+                texto.style.backgroundColor = 'black';
+                texto.style.color = 'white';
+                texto.style.borderRadius = '5px';
+                texto.style.width = '130px';
+                /* Si están agregados los estilos y das al botón vuelven sus valores iniciales */
+            } else {
+                texto.style.backgroundColor = 'initial';
+                texto.style.color = 'initial';
+            }
+            /* Pongo el valor del botón al contrario */
+            botonPresionado = !botonPresionado;
+        }
+       
+    </script>
+</body>
+</html>

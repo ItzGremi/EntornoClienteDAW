@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<body>
+    <!-- Hago una lista ordenada -->
+    <ol id="listaP">
+        <li>Jaime</li>
+        <li>Miguel</li>
+        <li>Sergio</li>
+        <li>Hugo</li>
+        <li>Pablo</li>    
+    </ol>
+    <script>
+        /* Recojo la lista */
+        var lista = document.getElementById('listaP');
+        /* Meto en una variable el primer elemento de la lista */
+        var primeraPersona = lista.firstElementChild.textContent;
+        /* Meto en una variable el último elemento de la lista */
+        var ultimaPersona = lista.lastElementChild.textContent;
+
+        document.write(`La primera persona es ${primeraPersona} y la última ${ultimaPersona}`);
+    </script>
+</body>
+</html>

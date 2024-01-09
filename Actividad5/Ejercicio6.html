@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio6</title>
+</head>
+<body>
+    <script>
+   /* Introduzco una cookie para ver que ocurre */
+    function crearCookie() {
+        // Solicitamos el nombre y la edad
+        var nombreUsuario = prompt('Ingrese su nombre:');
+        var edadUsuario = prompt('Ingrese su edad:');
+
+        var datosUsuario = `nombre=${nombreUsuario}, edad=${edadUsuario}`;
+
+        // Creamos una variable que sea una fecha, le introducimos la hora actual más 30 minutos
+        var fechaExpiracion = new Date();
+        fechaExpiracion.setTime(fechaExpiracion.getTime() + (30 * 60 * 1000)); // 30 minutos en milisegundos
+
+        // Convertimos la fecha de caducidad a formato de cadena UTC
+        var cadenaFechaExpiracion = fechaExpiracion.toUTCString();
+
+        // Creamos la cookie con los datos y la fecha de caducidad
+        document.cookie = `datosUsuario=${datosUsuario}; expires=${cadenaFechaExpiracion}; path=/`;
+
+        alert('Cookie creada con éxito.');
+        }
+        -
+        /* Utilizamos la función */
+        crearCookie();
+
+
+    // Hacemos la función para comprobar y borrar cookies
+    function comprobarYBorrarCookies() {
+        // Obtenemos todas las cookies
+        var cookies = document.cookie.split(';');
+
+        // Verificar si hay cookies para borrar
+        if (cookies.length > 0 && cookies[0].trim() !== '') {
+            // Iterar sobre las cookies y borrarlas
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var igualPos = cookie.indexOf('=');
+                var nombre = igualPos > -1 ? cookie.substr(0, igualPos).trim() : cookie.trim();
+                // Borrar la cookie estableciendo una fecha de caducidad en el pasado
+                document.cookie = nombre + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            }
+
+            console.log('Cookies eliminadas.');
+        } else {
+            console.log('No hay cookies para eliminar.');
+        }
+    }
+
+    // Configurar la comprobación cada 10 segundos
+    setInterval(comprobarYBorrarCookies, 10000);
+
+    </script>
+</body>
+</html>

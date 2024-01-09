@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+</head>
+<body>
+    <script>
+        function crearCookie() {
+        // Solicitamos el nombre y la edad
+        var nombreUsuario = prompt('Ingrese su nombre:');
+        var edadUsuario = prompt('Ingrese su edad:');
+
+        var datosUsuario = `nombre=${nombreUsuario}, edad=${edadUsuario}`;
+
+        // Creamos una variable que sea una fecha, le introducimos la hora actual más 30 minutos
+        var fechaExpiracion = new Date();
+        fechaExpiracion.setTime(fechaExpiracion.getTime() + (30 * 60 * 1000)); // 30 minutos en milisegundos
+
+        // Convertimos la fecha de caducidad a formato de cadena UTC
+        var cadenaFechaExpiracion = fechaExpiracion.toUTCString();
+
+        // Creamos la cookie con los datos y la fecha de caducidad
+        document.cookie = `datosUsuario=${datosUsuario}; expires=${cadenaFechaExpiracion}; path=/`;
+
+        alert('Cookie creada con éxito.');
+        }
+        /* Utilizamos la función */
+        crearCookie();
+    </script>
+</body>
+</html>

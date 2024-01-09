@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<body>
+    <!-- Creamos la tabla -->
+    <table border="1" id="tabla">
+        <thead>
+            <tr>
+             <td>Nombre</td>
+             <td>Edad</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>Sergio</td>
+            <td>19</td>
+        </tr>
+        <tbody>
+
+        </tbody>
+    </table>
+    <br>
+    <!-- Botón para agregar la fila -->
+    <button onclick="agregarFila()">Agregar Fila</button>
+    <script>
+        function agregarFila(){
+            /* Recojo la tabla en una variable */
+            var tab = document.getElementById('tabla');
+            /* Se introducen nombre y edad */
+            var nombreIntroducido = prompt('Introduce el nombre');
+            var edadIntroducida = prompt('Introduce la edad');
+            /* Hago una variable que sea una fila insertada */
+            var linea = tab.insertRow();
+            /* En esa fila hacemos variables para sus celdas */
+            var nombre = linea.insertCell(0);
+            var edad = linea.insertCell(1);
+
+            /* Introducimos en las celdas el nombre y edad */
+            nombre.textContent = nombreIntroducido;
+            edad.textContent = edadIntroducida;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio7</title>
+</head>
+<body>
+    <table border="1" id="tab">
+
+    </table>
+
+    <script>
+        var tablita = document.getElementById('tab');
+        var filas = prompt('Introduce las filas de la tabla');
+        var columnas = prompt('Introduce las columnas de la tabla');
+
+        // Creamos la tabla y llenarla con números aleatorios
+        for (let i = 0; i < filas; i++) {
+            var fila = tablita.insertRow();
+
+            for (let j = 0; j < columnas; j++) {
+                var celda = fila.insertCell();
+                celda.innerHTML = Math.floor(Math.random() * 100) + 1; // Números aleatorios del 1 al 100
+            }
+        }
+
+        // Contar filas y columnas
+        var num_filas = tablita.rows.length;
+        var num_columnas = tablita.rows[0].cells.length;
+
+        // Mostrar el resultado en consola
+        console.log(`Se han detectado ${num_filas} filas y ${num_columnas} columnas en la tabla.`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio4</title>
+</head>
+<body>
+    <!-- Elementos -->
+    <p>Un párrafo</p>
+    <p>Otro párrafo</p>
+    <span>Un span</span>
+    <br>
+    <br>
+    <a href="#">Enlace Uno</a>
+    <br>
+    <a href="#">Enlace Dos</a>
+    <br>
+    <a href="#">Enlace Tres</a>
+
+    <script>
+        /* Recojo la longitud de todas las etiquetas en variables */
+        var parrafos = document.getElementsByTagName('p').length;
+        var span = document.getElementsByTagName('span').length;
+        var a = document.getElementsByTagName('a').length;
+
+        /* Las escribo en consola */
+        console.log(`En este código html hay ${parrafos} párrafos, ${span} span y ${a} a.`)
+    </script>
+</body>
+</html>
