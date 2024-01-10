@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+    <!-- Hago un contenedor para la imagen -->
+    <div id="container">
+
+    </div>
+
+    <!-- El script correspondiente con el atributo defer para que tenga preferencia -->
+    <script defer>
+        /* Recojo el contenedor de la imagen */
+        var cont = document.getElementById("container");
+        /* Creo un elemento imagen */
+        var img = document.createElement("img");
+        /* Realizo el evento que guardará la tecla que has presionado y según la que hayas 
+        pulsado sale una imagen u otra */
+        document.addEventListener("keydown", function(event){
+            img.src = `img/${event.key}.jpg`;
+            img.style = `height:500px; width:500px;`
+        })
+        /* Añadimos la imagen dentro del contenedor */
+        cont.appendChild(img);
+    </script>
+
+</body>
+</html>

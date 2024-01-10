@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+    <style>
+        #caja{
+            height: 300px;
+            width: 300px;
+            background-color: red;
+            transition: transform 0.2s ease; /* Agregamos una transición para hacer el movimiento más suave 
+            y la propiedad ease lo que hace es que si dejas pulsada una tecla haga su movimiento algo más
+            rápido*/
+        }
+    </style>
+</head>
+<body>
+    <!-- Hacemos una caja -->
+    <div id="caja"></div>
+
+    <script defer>
+        /* Hacemos los ejes x e y inicializados a cero */
+        var x = 0;
+        var y = 0;
+
+        /* Hacemos el evento que recoje la tecla que presionemos */
+        document.addEventListener("keydown", function(event){
+            /* Recojo la caja */
+            var cajita = document.getElementById("caja");
+            /* Realizo un movimiento de la caja dependiendo de la tecla pulsada */
+            if(event.key === "ArrowUp"){
+                y -= 10;
+            } else if(event.key === "ArrowDown"){
+                y += 10;
+            } else if(event.key === "ArrowRight"){
+                x += 10;
+            } else if(event.key === "ArrowLeft"){
+                x -= 10;
+            }
+
+            /* Usamos el atributo transform trasladando la caja a los pixeles que hayan en el eje x e y */
+            cajita.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
+</body>
+</html>
