@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio8</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 80px);
+            gap: 10px;
+        }
+        .caja {
+            background-color: black;
+            margin: 10px;
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="caja" id="n1"></div>
+    <div class="caja" id="n2"></div>
+    <div class="caja" id="n3"></div>
+    <div class="caja" id="n4"></div>
+    <div class="caja" id="n5"></div>
+    <div class="caja" id="n6"></div>
+    <div class="caja" id="n7"></div>
+    <div class="caja" id="n8"></div>
+    <div class="caja" id="n9"></div>
+    <div class="caja" id="n10"></div>
+    <div class="caja" id="n11"></div>
+    <div class="caja" id="n12"></div>
+    <div class="caja" id="n13"></div>
+    <div class="caja" id="n14"></div>
+    <div class="caja" id="n15"></div>
+    <div class="caja" id="n16"></div>
+    <div class="caja" id="n17"></div>
+    <div class="caja" id="n18"></div>
+    <div class="caja" id="n19"></div>
+    <div class="caja" id="n20"></div>
+    <div class="caja" id="n21"></div>
+    <div class="caja" id="n22"></div>
+    <div class="caja" id="n23"></div>
+    <div class="caja" id="n24"></div>
+    <div class="caja" id="n25"></div>
+    <div class="caja" id="n26"></div>
+    <div class="caja" id="n27"></div>
+    <div class="caja" id="n28"></div>
+    <div class="caja" id="n29"></div>
+    <div class="caja" id="n30"></div>
+</div>
+
+<script defer>
+    // Recogemos todas las cajas
+    const cajas = document.querySelectorAll('.caja');
+    // Creamos variables de la primera y segunda caja, de los intentos y de las parejas encontradas
+    let primeraCaja = null;
+    let segundaCaja = null;
+    let intentos = 0;
+    let parejasEncontradas = 0;
+
+    // Igualo una constante a la función que genera un color para una pareja
+    const coloresParejas = generarColoresParejas();
+
+    // Recorro las cajas y cuando se clique una hago la función manejarClicCaja
+    cajas.forEach((caja, index) => {
+        caja.addEventListener('click', () => manejarClicCaja(caja, index));
+    });
+
+    // Función que genera colores
+    function generarColoresParejas() {
+        // Hago un array de los colores
+        const colores = [];
+        // Hago un bucle de 15 para obtener 15 colores
+        for (let i = 0; i < 15; i++) {
+            // Obtengo un color random
+            const color = getRandomColor();
+            // Meto dos veces el color en el array de colores
+            colores.push(color);
+            colores.push(color);
+        }
+        // Devuelvo el Array pero reorganizado para que no estén juntos los mismos colores
+        return arrayMovido(colores);
+    }
+
+    // Esta función devuelve un color aleatorio
+    function getRandomColor() {
+        const letras = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letras[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Función para desordenar un array
+    function arrayMovido(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Función que se realiza cuando haces un click
+    function manejarClicCaja(caja, index) {
+        if (!primeraCaja) {
+            primeraCaja = caja;
+            revelarCaja(primeraCaja, index);
+            // Si la segunda caja no es igual a la primera que haga lo siguiente
+        } else if (!segundaCaja && caja !== primeraCaja) {
+            segundaCaja = caja;
+            revelarCaja(segundaCaja, index);
+            // Sumamos intentos
+            intentos++;
+
+            setTimeout(() => {
+                if (coloresParejas[parseInt(primeraCaja.id.slice(1)) - 1] === coloresParejas[parseInt(segundaCaja.id.slice(1)) - 1]) {
+                    primeraCaja.removeEventListener('click', () => manejarClicCaja(primeraCaja, index));
+                    segundaCaja.removeEventListener('click', () => manejarClicCaja(segundaCaja, index));
+                    // Sumamos parejas encontradas
+                    parejasEncontradas++;
+
+                    /* Si las 15 parejas han sido encontradas se felicita y mencionamos los intentos utilizados */
+                    if (parejasEncontradas === 15) {
+                        alert(`¡Felicidades! Has encontrado todas las parejas en ${intentos} intentos.`);
+                    }
+                } else {
+                    /* Ocultamos las dos cajas de nuevo si no son los mismos colores */
+                    ocultarCajas([primeraCaja, segundaCaja]);
+                }
+
+                /* Igualamos la primera y segunda caja a nulos */
+                primeraCaja = null;
+                segundaCaja = null;
+            }, 1000);
+        }
+    }
+
+    // Función que le pone color a la caja
+    function revelarCaja(caja, index) {
+        caja.style.backgroundColor = coloresParejas[index];
+        caja.removeEventListener('click', () => manejarClicCaja(caja, index));
+    }
+
+    // Función que pone negras las cajas
+    function ocultarCajas(cajas) {
+        cajas.forEach(caja => {
+            caja.style.backgroundColor = 'black';
+        });
+    }
+</script>
+
+
+</body>
+</html>

@@ -4,43 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio3</title>
+    <style>
+        /* Estilo de la imagen para que se vea correctamente */
+        img {
+            height: 10px;
+            width: 10px;
+            margin-left: 3px;
+            cursor: pointer; /* Agrega un cursor de puntero al pasar sobre la imagen */
+        }
+    </style>
 </head>
 <body>
     <ul id="lista">
-        <li>Sergio<img src="img/x.jpg" alt="x"></li> 
-        <li>Juan <img src="x.jpg" alt="x"></li>
-        <li>Enrique <img src="x.jpg" alt="x"></li>
-        <li>María <img src="x.jpg" alt="x"></li>
-        <li>Laura <img src="x.jpg" alt="x"></li>
+        <li>Sergio<img src="img/x.jpg" alt="x" class="borrar"></li>
+        <li>Juan <img src="img/x.jpg" alt="x" class="borrar"></li>
+        <li>Enrique <img src="img/x.jpg" alt="x" class="borrar"></li>
+        <li>María <img src="img/x.jpg" alt="x" class="borrar"></li>
+        <li>Laura <img src="img/x.jpg" alt="x" class="borrar"></li>
     </ul>
+    <!-- Botón para agregar elemento a la lista -->
+    <button id="btn">Agregar Elemento</button>
 
     <script defer>
-        /* Recogemos la lista a través de su id */
-        var lista = document.getElementById('lista');
-        /* Hacemos un array de los elementos que contiene la lista dentro */
-        var elementos = Array.from(lista.children);
+        /* Recojo la lista y el botón */
+        const lista = document.getElementById("lista");
+        const btn = document.getElementById("btn");
 
-        var pregunta = prompt('¿Quieres ordenar la lista?');
-
-        if (pregunta === 'aceptar') {
-            /* Utilizamos sort para ordenar la lista */
-            elementos.sort((a, b) => a.textContent.localeCompare(b.textContent));
-            // Actualizamos el contenido de la lista con los elementos ordenados, eliminando la actual y reescribiéndola ya ordenada
-            lista.innerHTML = "";
-            elementos.forEach(elemento => lista.appendChild(elemento));
-        } else if (pregunta === 'cancelar') {
-            // Desordenamos aleatoriamente la lista
-            for (let i = elementos.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                /* Intercambiamos los valores de i y j para que no se repitan nombres */
-                [elementos[i].textContent, elementos[j].textContent] = [elementos[j].textContent, elementos[i].textContent];
+        /* Evento para que cuando pulse en la imagen x se borre su nodo padre que sería el elemento de la lista */
+        lista.addEventListener("click", function(event){
+            /* event.target es para identificar que se ha clickado en el lugar correspondiente */
+            if (event.target.className === "borrar") {
+                event.target.parentNode.remove();
             }
-            // Actualizamos el contenido de la lista con los elementos desordenados
-            lista.innerHTML = "";
-            elementos.forEach(elemento => lista.appendChild(elemento));
-        } else {
-            alert('Introdujiste un valor que no es adecuado. Pon aceptar o cancelar');
-        }
+        });
+
+        /* Evento para que cuando pulse el botón me pida el nombre de la persona que quiero agregar y la agregue
+        junto con la imagen de la x para poder eliminarla*/
+        btn.addEventListener("click", function(event){
+            /* Recojo el elemento de la lista y la imagen */
+            var elemento = document.createElement("li");
+            var imagen = document.createElement("img");
+            /* Agrego los atributos de la imagen */
+            imagen.src = "img/x.jpg";
+            imagen.alt = "x";
+            imagen.className = "borrar";
+            /* Pregunto por la persona que quiere agregar */
+            var nombre = prompt("¿Qué persona quieres agregar?");
+            /* Introduzco el nombre en el elemento */
+            elemento.textContent = nombre;
+            /* Agrego como hijo de la lista al elemento y como hijo del elemento a la imagen */
+            lista.appendChild(elemento);
+            elemento.appendChild(imagen);
+        })
     </script>
 </body>
 </html>

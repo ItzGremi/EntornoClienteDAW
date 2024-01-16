@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio6</title>
+</head>
+<body>
+    <p id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint explicabo quos dolores, vel 
+        voluptas tempore possimus obcaecati natus, dicta illum error eum aut rerum, tempora sit molestiae
+        quae praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint explicabo quos dolores, vel 
+        voluptas tempore possimus obcaecati natus, dicta illum error eum aut rerum, tempora sit molestiae
+        quae praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint explicabo quos dolores, vel 
+        voluptas tempore possimus obcaecati natus, dicta illum error eum aut rerum, tempora sit molestiae
+        quae praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint explicabo quos dolores, vel 
+        voluptas tempore possimus obcaecati natus, dicta illum error eum aut rerum, tempora sit molestiae
+        quae praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint explicabo quos dolores, vel 
+        voluptas tempore possimus obcaecati natus, dicta illum error eum aut rerum, tempora sit molestiae
+        quae praesentium.</p>
+
+        <!-- Botones con la función que tienen que hacer -->
+        <button onclick="borrarVocal('a')">a</button>
+        <button onclick="borrarVocal('e')">e</button>
+        <button onclick="borrarVocal('i')">i</button>
+        <button onclick="borrarVocal('o')">o</button>
+        <button onclick="borrarVocal('u')">u</button>
+
+        <script defer>
+            /* Recojo el texto */
+            var texto = document.getElementById('texto');
+            /* Función donde introduzco la vocal del botón como parámetro */
+            function borrarVocal(vocal){
+                /* Hago una variable de un nuevo texto que sea el texto actual pero reemplazando
+                todas las vocales de la que has introducido como parámetro. new RegExp hace que te refieras 
+                a la vocal y con gi lo haces global para que se reemplacen todas e i lo hace insensible a
+                mayúsculas o minúsculas */
+                var nuevoTexto = texto.innerText.replace(new RegExp(vocal, 'gi'), '');
+                /* Agrego el nuevo texto */
+                texto.innerText = nuevoTexto;
+            }
+        </script>
+    
+</body>
+</html>

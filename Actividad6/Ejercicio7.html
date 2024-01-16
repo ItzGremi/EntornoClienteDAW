@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio7</title>
+    <style>
+        /* Estilos de las dos cajas */
+        #cajaUno {
+            background-color: green;
+            height: 40px;
+            width: 10px;
+        }
+        #cajaDos {
+            background-color: red;
+            height: 40px;
+            width: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cajas y textos vacíos para anunciar el ganador -->
+    <div id="cajaUno"></div>
+    <p id="paUno"></p>
+    <br>
+    <div id="cajaDos"></div>
+    <p id="paDos"></p>
+
+    <script defer>
+        /* Recojo las cajas y textos */
+        var cajaUno = document.getElementById('cajaUno');
+        var cajaDos = document.getElementById('cajaDos');
+        var paUno = document.getElementById('paUno');
+        var paDos = document.getElementById('paDos');
+        /* Creo variable de ancho máximo y del ancho actual de cada caja */
+        var anchoMaximo = 500;
+        var anchoActualUno = 10;
+        var anchoActualDos = 10;
+
+        /* Evento de pulsar tecla */
+        document.addEventListener('keydown', function (event) {
+            /* Si pulsamos a el ancho actual de la caja uno aumenta 5px */
+            if (event.key === 'a') {
+                anchoActualUno += 5;
+                cajaUno.style.width = anchoActualUno + 'px';
+                /* Si el ancho actual de la caja uno llega a 500 ponemos que gana verde y eliminamos el evento */
+                if (anchoActualUno === anchoMaximo) {
+                    paUno.innerText = 'Gana verde';
+                    document.removeEventListener('keydown', arguments.callee);
+                }
+            } 
+            /* Si pulsamos ñ el ancho actual de la caja dos aumenta 5px */
+            else if (event.key === 'ñ') {
+                anchoActualDos += 5;
+                cajaDos.style.width = anchoActualDos + 'px';
+                /* Si el ancho actual de la caja dos llega a 500 ponemos que gana rojo y eliminamos el evento */
+                if (anchoActualDos === anchoMaximo) {
+                    paDos.innerText = 'Gana rojo';
+                    document.removeEventListener('keydown', arguments.callee);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+

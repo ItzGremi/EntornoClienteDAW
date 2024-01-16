@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+    <style>
+        /* Estilos de la caja */
+        #caja{
+            height:100px;
+            width:100px;
+            background-color:blue;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="caja">
+
+    </div>
+
+    <script defer>
+        /* Recojo la caja */
+        var caja = document.getElementById("caja");
+        /* Evento que detecta cuando el cursor está encima de la caja */
+        caja.addEventListener("mouseenter", function(event){
+            /* Número random de 0 a el total de ancho de la pantalla menos 100 que son los píxeles de la caja */
+            var x = Math.round(Math.random() * (window.innerWidth - 100));
+            /* Número random de 0 a el total de alto de la pantalla menos 100 que son los píxeles de la caja */
+            var y = Math.round(Math.random() * (window.innerHeight - 100));
+            /* Trasladamos la caja a un lugar aleatorio de la pantalla */
+            caja.style = `transform: translate(${x}px,${y}px)`
+        });
+    </script>
+</body>
+</html>
