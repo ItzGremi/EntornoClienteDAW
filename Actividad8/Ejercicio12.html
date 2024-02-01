@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio12</title>
+  <!-- ESTE EJERCICIO CONSISTIRÁ EN UTILIZAR LA API DE POKÉMON Y QUE TE DE LA IMAGEN DE UN POKÉMON SHINY -->
+  <style>
+    /* Estilos que he utilizado para que se vea bien la página. No los comento detalladamente porque no pertenece
+    a esta asignatura en realidad jeje */
+    body{
+        background-color: rgb(22, 22, 22);
+        font-size:30px;
+    }
+    #form{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align:center;
+        color:rgb(226, 217, 217);
+    }
+
+    #busqueda{
+        margin-right: 43%;
+        margin-left: 43%;
+        margin-bottom:30px;
+    }
+
+    #btn{
+        margin-right: 47%;
+        margin-left: 47%;
+    }
+
+    #btn:hover{
+        background-color: transparent;
+        color:white;
+        border-color:white;
+    }
+
+    #pokemonInfo img{
+        height:300px;
+        width:auto;
+        border:solid 2px white;
+    }
+  </style>
+</head>
+<body>
+    <!-- Formulario donde pedirás un pokemon y te dará la imagen de su shiny -->
+    <form action="" id="form">
+        <h1 id="titulo">Información de Pokémon</h1>
+        <div id="pokemonInfo">
+            <p id="parrafo"></p>
+        </div>
+        <h2>Introduce un Pokémon:</h2>
+        <input type="text" name="" id="busqueda">
+        <button type="submit" id="btn">Buscar</button>
+    </form>
+  
+  <script defer>
+        /* Variable que más abajo entenderás su función */
+        var i = 1; 
+        
+        /* Función asincrona para buscar la información de un pokémon a través de su api
+        y la transformamos en un json para poder utilizar dicha información */
+        async function fetchPokemon(pokemon){
+            const datos = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`);
+            const datosJson = await datos.json();
+            return datosJson;
+        }
+
+        /* Función para conseguir la imagen del shiny que tu quieras */
+        async function conseguirShiny(pokemon){
+            /* Obtenemos la cadena json en una variable */
+            const datosJson = await fetchPokemon(pokemon);
+            /* Variable de la imagen que queremos en concreto */
+            const imagenShiny = datosJson.sprites.front_shiny;
+            /* Obtenemos el contenedor */
+            const container = document.getElementById("pokemonInfo");
+            /* Creamos el elemento imagen */
+            const imagen = document.createElement("img");
+            /* Le ponemos como src el sprite del json */
+            imagen.src = imagenShiny;
+            /* Le damos como id la variable inicializada al inicio del script */
+            imagen.id = i;
+            /* Obtenemos la imagen que introducimos antes */
+            const imagenActual = document.getElementById(`${i-1}`);
+            /* Si existe esa imagen la eliminamos */
+            if (imagenActual) {
+                container.removeChild(imagenActual);
+            }
+            /* Agregamos la imagen nueva */
+            container.appendChild(imagen);
+
+            /* Recogemos el parrafo y lo vaciamos */
+            const parrafo = document.getElementById("parrafo");
+            parrafo.innerHTML = "";
+
+            /* Recogemos el titulo y le introducimos el nombre del pokemon 
+            actual que estamos buscando */
+            const titulo = document.getElementById("titulo");
+            titulo.innerHTML = `Shiny de ${pokemon}`;
+            /* Agregamos un numero a esta variable para que cambie en la siguiente
+            imagen que agreguemos y se pueda borrar la anterior */
+            i++;
+        }
+
+        /* Recogemos el formulario y el texto */
+        var formulario = document.getElementById("form");
+        var texto = document.getElementById("busqueda");
+
+        /* Evento para que cuando le de al botón buscar haga la función de buscar
+        un shiny */
+        formulario.addEventListener("submit", function(event){
+            /* Para evitar que se recargue la página */
+            event.preventDefault();
+            /* Recogemos el párrafo */
+            const parrafo = document.getElementById("parrafo");
+            /* Ponemos cargando hasta que se encuentre el pokémon */
+            parrafo.innerHTML = "Cargando...";
+            /* Igualamos la variable pokemon al valor introducido en el input */
+            const pokemon = texto.value;
+            /* Función para conseguir el shiny del pokémon escrito */
+            conseguirShiny(pokemon);
+        });
+
+  </script>
+</body>
+</html>
+
+

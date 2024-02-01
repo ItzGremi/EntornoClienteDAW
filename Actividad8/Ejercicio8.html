@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio8</title>
+</head>
+<body>
+    <div id="cv-container">
+        <!-- Aquí se mostrará el currículum -->
+    </div>
+    
+    <script defer>
+
+        // Función para realizar una solicitud a la API de SWAPI y devolver los datos en formato JSON
+        async function fetchData(url) {
+        /* Response va a realizar una petición de información y no pasará a la siguiente linea de código hasta que se realice */
+        const response = await fetch(url);
+        /* Data va a ser la variable response pero transformada a JSON, y no se returnará esta variable hasta que se haya hecho */
+        const data = await response.json();
+        /* Devolvemos data */
+        return data;
+        }
+
+        /* Función asíncrona que muestra todos los datos del currículum */
+        async function mostrarCurriculum(){
+            /* Utilizamos la función creada anteriormente para conseguir en JSON los datos del curriculum */
+            const curriculum = await fetchData('Curriculum.json');
+            
+            /* Recojo el contenedor a través de su id */
+            const container = document.getElementById('cv-container');
+
+            // Creamos elementos HTML para mostrar la información del currículum
+            const personalInfoElement = document.createElement('div');
+            personalInfoElement.innerHTML = `
+                <h2>Información Personal</h2>
+                <p>Nombre: ${curriculum.informacion_personal.nombre}</p>
+                <p>Teléfono: ${curriculum.informacion_personal.telefono}</p>
+                <p>Email: ${curriculum.informacion_personal.email}</p>
+                <p>Dirección: ${curriculum.informacion_personal.direccion}</p>
+            `;
+
+            /* Agregamos como hijo el div recientemente creado al contenedor */
+            container.appendChild(personalInfoElement);
+
+            // Creamos elementos HTML para mostrar la información del currículum
+            const educacionElement = document.createElement('div');
+            educacionElement.innerHTML = '<h2>Educación</h2>';
+            curriculum.educacion.forEach(educacion => {
+                educacionElement.innerHTML += `
+                    <p>Institución: ${educacion.institucion}</p>
+                    <p>Título: ${educacion.titulo}</p>
+                    <p>Periodo: ${educacion.periodo}</p>
+                    <p>Descripción: ${educacion.descripcion}</p>
+                `;
+            });
+
+            /* Agregamos como hijo el div recientemente creado al contenedor */
+            container.appendChild(educacionElement);
+
+            // Creamos elementos HTML para mostrar la información del currículum
+            const experienciaElement = document.createElement('div');
+            experienciaElement.innerHTML = `
+                <h2>Experiencia</h2>
+                <p>Puesto: ${curriculum.experiencia.puesto}</p>
+                <p>Empresa: ${curriculum.experiencia.empresa}</p>
+                <p>Periodo: ${curriculum.experiencia.periodo}</p>
+                <p>Descripción: ${curriculum.experiencia.descripcion}</p>
+            `;
+
+            /* Agregamos como hijo el div recientemente creado al contenedor */
+            container.appendChild(experienciaElement);
+        }
+
+        // Llamamos a la función para mostrar el currículum cuando la página esté completamente cargada
+        document.addEventListener('DOMContentLoaded', mostrarCurriculum);
+    </script>
+</body>
+</html>

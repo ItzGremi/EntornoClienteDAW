@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio4</title>
+</head>
+<body>
+
+    <!-- Enlace que habrá que pulsar. El patrón que queremos detectar es que se de click al link y posteriormente se le de a la tecla 'g' -->
+    <a href="#" id="enlace">Enlace</a>
+    
+    <script defer>
+        /* Recogemos el enlace a través de su id */
+        const enlace = document.getElementById("enlace");
+        /* Primera promesa */
+        function primeraPromesa(){
+            return new Promise(function(resolve, reject){
+                /* Evento para detectar si se hace click al enlace */
+                enlace.addEventListener("click", function(event){
+                    /* Si se le da click se resuelve y te envía al .then */
+                    resolve();
+                })
+            });
+        }
+
+        /* Segunda promesa */
+        function segundaPromesa(){
+            return new Promise(function(resolve, reject){
+                /* Evento de pulsar tecla para saber si se pulsa la 'g' */
+                document.addEventListener("keydown", function(event){
+                    if(event.key === "g"){
+                        /* Si se ha pulsado la 'g' se resuelve*/
+                        resolve();
+                    } else {
+                        /* Si se ha pulsado otra nos echa de la promesa y no pasa al .then */
+                        reject();
+                    }
+                })
+            })
+        }
+
+        /* Si la primera promesa se resuelve se hace la segunda */
+        primeraPromesa().then(segundaPromesa());
+        /* Si la segunda promesa se resuelve hacemos que ponga una alerta de patrón detectado */
+        segundaPromesa().then(function(){
+            alert("¡PATRÓN DETECTADO!");
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+    <script defer>
+        // Función para lanzar un error según la opción seleccionada
+        function lanzarError(opcion) {
+            switch (opcion) {
+                case 1:
+                    throw new EvalError("Este es un error de evaluación al utilizar eval()");
+                case 2:
+                    throw new InternalError("Este es un error interno en el motor de JavaScript");
+                case 3:
+                    throw new RangeError("Este es un error de rango al usar un valor fuera de los límites");
+                case 4:
+                    throw new ReferenceError("Este es un error de referencia al acceder a una variable no definida");
+                case 5:
+                    throw new SyntaxError("Este es un error de sintaxis al intentar interpretar código no válido");
+                case 6:
+                    throw new TypeError("Este es un error de tipo al utilizar un tipo incorrecto");
+                case 7:
+                    throw new URIError("Este es un error de URI al codificar o decodificar un URI");
+                default:
+                    throw new Error("Opción no válida");
+            }
+        }
+
+        // Función principal que utiliza try and catch para gestionar cualquier tipo de error
+        function manejarErrores(opcion) {
+            try {
+                lanzarError(opcion);
+            } catch (error) {
+                console.log(`Se ha producido un error: ${error.message}`);
+            }
+        }
+
+        // Ejemplo de uso: Cambia el valor de opcion para probar diferentes tipos de errores
+        const opcion = "Hola";
+        manejarErrores(opcion);
+
+    </script>
+</body>
+</html>

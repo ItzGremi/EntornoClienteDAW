@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio6</title>
+</head>
+<body>
+    <h1>Respuesta de la Petición AJAX:</h1>
+    <div id="response"></div>
+
+    <script>
+        // Creamos una instancia del objeto XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+
+        // Configuramos la solicitud
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/1', true);
+
+        // Definimos el comportamiento cuando la solicitud se complete
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Si la solicitud es exitosa, mostramos la respuesta
+                const response = JSON.parse(xhr.responseText);
+                document.getElementById('response').innerHTML = 
+                    `<p>ID: ${response.id}</p>
+                    <p>Título: ${response.title}</p>
+                    <p>Cuerpo: ${response.body}</p>`;
+            } else {
+                // Si la solicitud falla, mostramos un mensaje de error
+                document.getElementById('response').innerHTML = 'Error al realizar la solicitud.';
+            }
+        };
+
+        // Manejamos errores de red u otras fallas
+        xhr.onerror = function() {
+            document.getElementById('response').innerHTML = 'Error de red.';
+        };
+
+        // Enviamos la solicitud
+        xhr.send();
+    </script>
+</body>
+</html>

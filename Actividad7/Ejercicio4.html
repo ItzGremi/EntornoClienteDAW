@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio4</title>
+</head>
+<body>
+
+<script>
+    // Datos del vehículo y propietario en formato JSON
+    const datosVehiculo = {
+    "marca": "Honda",
+    "modelo": "Civic",
+    "numeroBastidor": "987654321",
+    "cilindrada": "1800cc",
+    "numeroPuertas": 4,
+    "color": "Rojo"
+};
+
+    const datosPropietario = {
+    "nombre": "Sergio",
+    "apellidos": "Pérez",
+    "direccion": "San Sebastián de los Reyes",
+    "telefono": "673421543",
+    "correoElectronico": "sergioperezbermejoo@gmail.com"
+};
+
+    /* Reúno todos los datos completos en uno para convertirlo en JSON */
+    const datosCompletos = {
+    "vehiculo": datosVehiculo,
+    "propietario": datosPropietario
+};
+
+    // Almacenar en localStorage
+    localStorage.setItem("datos", JSON.stringify(datosCompletos));
+
+    // Leer y mostrar la información almacenada
+    const datosAlmacenados = localStorage.getItem("datos");
+    const datosJSON = JSON.parse(datosAlmacenados);
+
+    // Mostrar información en el cuerpo del documento HTML
+    document.body.innerHTML = `
+        <h1>Información del Vehículo</h1>
+        <p><strong>Marca:</strong> ${datosJSON.vehiculo.marca}</p>
+        <p><strong>Modelo:</strong> ${datosJSON.vehiculo.modelo}</p>
+        <p><strong>Número de Bastidor:</strong> ${datosJSON.vehiculo.numeroBastidor}</p>
+        <p><strong>Cilindrada:</strong> ${datosJSON.vehiculo.cilindrada}</p>
+        <p><strong>Número de Puertas:</strong> ${datosJSON.vehiculo.numeroPuertas}</p>
+        <p><strong>Color:</strong> ${datosJSON.vehiculo.color}</p>
+
+        <h1>Información del Propietario</h1>
+        <p><strong>Nombre:</strong> ${datosJSON.propietario.nombre}</p>
+        <p><strong>Apellidos:</strong> ${datosJSON.propietario.apellidos}</p>
+        <p><strong>Dirección:</strong> ${datosJSON.propietario.direccion}</p>
+        <p><strong>Teléfono:</strong> ${datosJSON.propietario.telefono}</p>
+        <p><strong>Correo Electrónico:</strong> ${datosJSON.propietario.correoElectronico}</p>
+    `;
+
+    // Eliminar la información al cerrar el navegador 
+    window.addEventListener("beforeunload", function() {
+        localStorage.removeItem("datos");
+    });
+</script>
+
+</body>
+</html>

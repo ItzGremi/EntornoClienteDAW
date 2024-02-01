@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+    <style>
+      /* Estilo del cuadro caanvas */
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Elemento canvas -->
+    <canvas id="mitsubishiCanvas" width="600" height="600"></canvas>
+
+    <script>
+            function Dibujar() {
+            // Recojo el canvas y su contexto
+            var canvas = document.getElementById("mitsubishiCanvas");
+            var context = canvas.getContext("2d");
+
+            // Configuro el estilo de dibujo
+            context.strokeStyle = "#000";
+            context.lineWidth = 5;
+            context.fillStyle = "#FF0000";  // Color de relleno en rojo
+
+            // Dibujo los rombos
+            drawDiamond(300, 300, 180);   // Rombo superior
+            drawDiamond(129, 390, 241);  // Rombo inferior izquierdo
+            drawDiamond(471, 390, 119); // Rombo inferior derecho
+
+            function drawDiamond(x, y, angulo) {
+                context.save();
+
+                // Traslado y roto el contexto
+                context.translate(x, y);
+                context.rotate((angulo * Math.PI) / 180);
+
+                // Dibujo el rombo
+                context.beginPath();
+                context.moveTo(0, 0);
+                context.lineTo(50, 100);
+                context.lineTo(0, 200);
+                context.lineTo(-50, 100);
+                context.closePath();
+
+                // Relleno el rombo con el color especificado
+                context.fill();
+
+                context.restore();
+            }
+        };
+
+        Dibujar();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

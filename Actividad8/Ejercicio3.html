@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<body>
+    <div id="mensaje">Cargando...</div>
+
+    <script>
+        console.log("cargando");
+        function CargandoDOM() {
+            return new Promise(function(resolve, reject) {
+                document.addEventListener("DOMContentLoaded", resolve);
+            });
+        }
+
+        CargandoDOM().then(function() {
+            document.getElementById("mensaje").textContent = "Listo para actuar";
+            console.log("Listo para actuar");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "informacion_personal": {
+    "nombre": "Sergio Pérez",
+    "telefono": "123-456-7890",
+    "email": "sergioperezbermejoo@gmail.com",
+    "direccion": "Calle Sacramento 3, Madrid, España"
+  },
+  "educacion": [
+    {
+      "institucion": "Virgen de la Paloma",
+      "titulo": "Desarrollo de Aplicaciones Web",
+      "periodo": "2022 - 2024",
+      "descripcion": "Pues se desarrollan aplicaciones web, no se que más decirte"
+    },
+    {
+      "institucion": "Severo Ochoa",
+      "titulo": "Bachillerato",
+      "periodo": "2020 - 2022",
+      "descripcion": "Un curso de sufrimiento constante, por poco y me quedo calvo del estrés"
+    }
+  ],
+  "experiencia": {
+      "puesto": "No",
+      "empresa": "Tengo",
+      "periodo": "Experiencia",
+      "descripcion": "Es triste pero cierto"
+    }
+}

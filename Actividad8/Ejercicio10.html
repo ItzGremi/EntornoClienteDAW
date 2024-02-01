@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio10</title>
+</head>
+<body>
+    <h1>Buscar en Mercado Libre</h1>
+    <form id="formulario">
+        <input type="text" id="busqueda" placeholder="¿Qué quieres buscar?">
+        <button type="submit">Buscar</button>
+    </form>
+    <div id="results-container"></div>
+
+    <script>
+        // Función para realizar la búsqueda en Mercado Libre
+        async function buscarMercadoLibre(query) {
+            /* Variable de la url con la búsqueda exacta a través de la variable query */
+            const url = `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
+            /* Buscamos en la api y lo guardamos en una variable */
+            const response = await fetch(url);
+            /* Transformamos los resultados en un JSON */
+            const data = await response.json();
+            /* Obtenemos solo los tres primeros resultados */
+            return data.results.slice(0, 3);
+        }
+
+        /* Recogemos el formulario */
+        const formulario = document.getElementById('formulario');
+        // Función para manejar el envío del formulario
+        formulario.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evitar el comportamiento por defecto de envío del formulario
+            /* Metemos en la variable query el valor introducido en el input busqueda */
+            const query = document.getElementById('busqueda').value;
+            /* Recogemos el contenedor de resultados */
+            const resultsContainer = document.getElementById('results-container');
+            /* Ponemos cargando resultados mientras se realiza la operación de búsqueda */
+            resultsContainer.innerHTML = '<p>Cargando resultados...</p>';
+            /* Hacemos manejo de errores */
+            try {
+                /* Recogemos en una variable los resultados */
+                const results = await buscarMercadoLibre(query);
+                /* Mostramos los resultados */
+                mostrarResultados(results);
+            } catch (error) {
+                /* En caso de error que se muestre */
+                console.error('Error al realizar la búsqueda:', error);
+                resultsContainer.innerHTML = '<p>Hubo un error al buscar. Inténtalo de nuevo más tarde.</p>';
+            }
+        });
+
+        // Función para mostrar los resultados en el contenedor
+        function mostrarResultados(results) {
+            /* Recogemos el contenedor */
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = ''; // Limpiar el contenedor
+            /* Recorremos los 3 resultados y vamos escribiendo los siguientes apartados del producto */
+            results.forEach(result => {
+                const item = document.createElement('div');
+                item.innerHTML = `
+                    <h2>${result.title}</h2>
+                    <p>Precio: ${result.price} ${result.currency_id}</p>
+                    <p>Condición: ${result.condition}</p>
+                    <p>Vendidos: ${result.sold_quantity}</p>
+                `;
+                /* Unimos el item al contenedor de resultados */
+                resultsContainer.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>

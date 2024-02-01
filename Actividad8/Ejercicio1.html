@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+
+    <script defer>
+        /* Función de cortar verduras con un parámetro callback que será otra función */
+        function cortarVerduras(callback) {
+            setTimeout(function() {
+                console.log('Verduras cortadas.');
+                callback();
+            }, 2000);
+        }
+
+        /* Función de cocinar verduras con un parámetro callback que será otra función */
+        function cocinarVerduras(callback) {
+            setTimeout(function() {
+                console.log('Verduras cocinadas.');
+                callback();
+            }, 3000);
+        }
+
+        /* Función de preparar salsa con un parámetro callback que será otra función */
+        function prepararSalsa(callback) {
+            setTimeout(function() {
+                console.log('Salsa lista.');
+                callback();
+            }, 1500);
+        }
+
+        /* Función de servir el plato sin callback */
+        function servirPlato() {
+            console.log('Plato servido. ¡Buen provecho!');
+        }
+        
+        /* Función de preparar receta que usa todas las funciones anteriores */
+        function prepararReceta() {
+            console.log('Comenzando a preparar la receta...');
+            cortarVerduras(function() {
+                cocinarVerduras(function() {
+                    prepararSalsa(function() {
+                        servirPlato();
+                    });
+                });
+            });
+        }
+
+        prepararReceta();
+
+    </script>
+</body>
+</html>
+
+

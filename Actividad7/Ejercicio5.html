@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+</head>
+<body>
+
+<script>
+    function mostrarNotificacion() {
+        // Comprobar si el navegador soporta las notificaciones
+        if (!("Notification" in window)) {
+            alert("Tu navegador no soporta notificaciones.");
+            return;
+        }
+
+        // Comprobar si las notificaciones están permitidas
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission().then(function(permission) {
+                if (permission === "granted") {
+                    notificarUsuario();
+                }
+            });
+        } else {
+            notificarUsuario();
+        }
+    }
+
+    function notificarUsuario() {
+        // Crear y mostrar la notificación
+        const notificacion = new Notification("Hola Enrique", {
+            body: "¿Un destacable o que? ;)",
+        });
+
+        // Cerrar automáticamente después de 5 segundos
+        setTimeout(function() {
+            notificacion.close();
+        }, 5000);
+
+        // Agregar un evento al hacer clic en la notificación
+        notificacion.onclick = function() {
+            // Se redirige a la persona al siguiente enlace
+            window.location.href = "https://pokemon.es";
+
+            // Detener las notificaciones
+            Notification.permission = "denied";
+        };
+    }
+
+    // Mostrar notificación cada 30 segundos
+    setInterval(mostrarNotificacion, 30000);
+</script>
+
+</body>
+</html>
+

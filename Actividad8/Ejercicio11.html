@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio11</title>
+    <style>
+        /* Estilos CSS para la cuadrícula de productos */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .product {
+            border: 1px solid #000000;
+            padding: 20px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cafés:</h1>
+    <div class="grid-container" id="products-grid">
+        <!-- Aquí se mostrarán los productos -->
+    </div>
+
+    <script>
+        // Función para obtener y mostrar los productos con imágenes de café
+        async function conseguirCafes() {
+            // Lista de productos (datos de prueba)
+            const products = [
+                { nombre: 'Café Uno', descripcion: 'Descripción de este tremendo café', precio: '2€' },
+                { nombre: 'Café Dos', descripcion: 'Descripción de este tremendo café', precio: '3,50€' },
+                { nombre: 'Café Tres', descripcion: 'Descripción de este tremendo café', precio: '2,20€' },
+                { nombre: 'Café Cuatro', descripcion: 'Descripción de este tremendo café', precio: '1,50€' },
+                { nombre: 'Café Cinco', descripcion: 'Descripción de este tremendo café', precio: '1,30€' },
+                { nombre: 'Café Seis', descripcion: 'Descripción de este tremendo café', precio: '4€' },
+                { nombre: 'Café Siete', descripcion: 'Descripción de este tremendo café', precio: '3,25€' },
+                { nombre: 'Café Ocho', descripcion: 'Descripción de este tremendo café', precio: '2,10€' },
+                { nombre: 'Café Nueve', descripcion: 'Descripción de este tremendo café', precio: '1,75€' }
+            ];
+
+            // Obtener el contenedor de los productos
+            const productsGrid = document.getElementById('products-grid');
+
+            // Iterar sobre cada producto
+            for (const product of products) {
+                // Obtener una imagen de café aleatoria por cada producto
+                const coffeeResponse = await fetch('https://coffee.alexflipnote.dev/random.json');
+                const coffeeImage = await coffeeResponse.json();
+
+                // Crear el elemento de producto y agregarlo a la cuadrícula
+                const productElement = document.createElement('div');
+                /* Agrego la clase product al elemento en el que estamos para que se le
+                aplique el CSS */
+                productElement.classList.add('product');
+                productElement.innerHTML = `
+                    <img src="${coffeeImage.file}" alt="Imagen de café">
+                    <h2>${product.nombre}</h2>
+                    <p>${product.descripcion}</p>
+                    <p>Precio: ${product.precio}</p>
+                `;
+                /* Agrego como hijo de los productos a cada uno de los productos */
+                productsGrid.appendChild(productElement);
+            }
+        }
+
+        // Llamar a la función para cargar los productos con imágenes de café después de que el DOM se haya cargado
+        document.addEventListener('DOMContentLoaded', conseguirCafes);
+    </script>
+</body>
+</html>
+

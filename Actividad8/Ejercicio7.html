@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio7</title>
+</head>
+
+<body>
+    
+    <div id="swapi-container"></div>
+
+    <script defer>
+
+        // Función para realizar una solicitud a la API de SWAPI y devolver los datos en formato JSON
+        async function fetchData(url) {
+        /* Response va a realizar una petición de información y no pasará a la siguiente linea de código hasta que se realice */
+        const response = await fetch(url);
+        /* Data va a ser la variable response pero transformada a JSON, y no se returnará esta variable hasta que se haya hecho */
+        const data = await response.json();
+        /* Devolvemos data */
+        return data;
+        }
+
+        // Función para obtener información de la persona, el planeta y la nave
+        async function getStarWarsInfo() {
+        /* Utilizamos la función creada anteriormente y le otorgamos dichos datos a diferentes variables */
+        const personData = await fetchData('https://swapi.dev/api/people/1/');
+        const planetData = await fetchData('https://swapi.dev/api/planets/3/');
+        const starshipData = await fetchData('https://swapi.dev/api/starships/5/');
+        /* Lo devolvemos como si fuese un objeto */
+        return {
+            person: personData,
+            planet: planetData,
+            starship: starshipData
+        };
+        }
+
+        // Función para mostrar la información en un documento HTML
+        async function mostrarInfo() {
+        /* Reunimos toda la información en una variable */
+        const info = await getStarWarsInfo();
+
+        const container = document.getElementById('swapi-container');
+
+        // Crear elementos HTML para mostrar la información
+        const personElement = document.createElement('div');
+        personElement.innerHTML = `<h2>Personaje</h2><p>Nombre: ${info.person.name}</p><p>Altura: ${info.person.height} cm</p>`;
+
+        const planetElement = document.createElement('div');
+        planetElement.innerHTML = `<h2>Planeta</h2><p>Nombre: ${info.planet.name}</p><p>Clima: ${info.planet.climate}</p>`;
+
+        const starshipElement = document.createElement('div');
+        starshipElement.innerHTML = `<h2>Nave Estelar</h2><p>Nombre: ${info.starship.name}</p><p>Modelo: ${info.starship.model}</p>`;
+
+        // Agregar elementos al contenedor
+        container.appendChild(personElement);
+        container.appendChild(planetElement);
+        container.appendChild(starshipElement);
+        }
+
+        // Llamar a la función para mostrar la información cuando la página esté completamente cargada
+        document.addEventListener('DOMContentLoaded', mostrarInfo);
+
+    </script>
+</body>
+</html>

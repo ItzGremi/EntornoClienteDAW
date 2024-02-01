@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+    <style>
+        
+        /* Estilos del formulario */
+
+        .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="tel"],
+        button {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .caja{
+            margin-right:8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del formulario para dar estilos -->
+    <div class="container">
+        <h1>Regístrate</h1>
+        <!-- Formulario -->
+        <form id="registroForm">
+            <input type="text" id="nombre" placeholder="Nombre" class="caja" required>
+            <input type="text" id="apellidos" placeholder="Apellidos" class="caja" required>
+            <input type="number" id="edad" placeholder="Edad" class="caja" required>
+            <input type="email" id="correo" placeholder="Correo Electrónico" class="caja" required>
+            <input type="tel" id="telefono" placeholder="Teléfono" class="caja" required>
+            <button type="submit" id="enviarBtn">Enviar</button>
+        </form>
+    </div>
+
+    <script defer>
+        /* Recojo el formulario y el botón por su ID */
+        const form = document.getElementById("registroForm");
+        const btn = document.getElementById("enviarBtn");
+        /* Evento que sucede al enviar el formulario */
+        form.addEventListener("submit", function(event){
+            /* Prevenimos que se envíe y reinicie la página */
+            event.preventDefault();
+            /* Recogemos el valor de todos los datos introducidos */
+            const nombre = document.getElementById("nombre").value;
+            const apellidos = document.getElementById("apellidos").value;
+            const edad = document.getElementById('edad').value;
+            const correo = document.getElementById('correo').value;
+            const telefono = document.getElementById('telefono').value;
+
+            /* Si todos los valores son correctos que mande enviado y que se reinicie el formulario, en caso de que no,
+            que informe que no se ha completado correctamente el registro */
+            if(nombre && apellidos && edad && correo && telefono){
+                /* Función para que se realice después de un segundo */
+                setTimeout(function() {
+                    btn.innerHTML = "¡ENVIADO!";
+                    // Reiniciar el formulario
+                    document.getElementById('registroForm').reset();
+                }, 1000);
+            } else {
+                alert("No has completado correctamente el registro");
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+</head>
+<body>
+    <a href="#" id="link">¡Haz click aquí!</a>
+    <div id="accion"></div>
+
+    <script defer>
+        /* Recojo el link y el div a través de su id */
+        const link = document.getElementById("link");
+        const accionUno = document.getElementById("accion");
+
+        /* Realizo una función quew returna una promesa y si se le da click al link esta se resuelve y te lleva
+        al then */
+        function promesa(){
+            return new Promise(function(resolve, reject){
+                link.addEventListener("click", function(event){
+                    resolve();
+                });
+            })
+        }
+
+        /* El then ejecuta otra función denominada primeraAccion */
+        promesa().then(primeraAccion);
+
+        /* Función que crea un elemento p, se le introduce un texto y se le agrega como hijo al
+        div del cual recogimos su id. Esto se realizará cuando pase un segundo y se ejecutará la segunda acción */
+        function primeraAccion(){
+            setTimeout(() =>{
+                const texto = document.createElement("p");
+                texto.innerHTML = "¡PRIMERA ACCIÓN!";
+                accionUno.appendChild(texto);
+                console.log("¡Primera acción!");
+                segundaAccion();
+            }, 1000);
+        }
+
+        /* Función que crea un elemento p, se le introduce un texto y se le agrega como hijo al
+        div del cual recogimos su id. Esto se realizará cuando pase un segundo y se ejecutará la tercera acción */
+        function segundaAccion(){
+            setTimeout(() =>{
+                const textoDos = document.createElement("p");
+                textoDos.innerHTML = "¡SEGUNDA ACCIÓN!";
+                accionUno.appendChild(textoDos);
+                console.log("¡Segunda acción!");
+                terceraAccion();
+            }, 2000);
+        }
+
+        /* Función que crea un elemento p, se le introduce un texto y se le agrega como hijo al
+        div del cual recogimos su id. Esto se realizará cuando pase un segundo */
+        function terceraAccion(){
+            setTimeout(()=>{
+                const textoTres = document.createElement("p");
+                textoTres.innerHTML = "¡TERCERA ACCIÓN!";
+                accionUno.appendChild(textoTres);
+                console.log("¡Tercera acción!");
+            },3000);
+        }
+    </script>
+</body>
+</html>

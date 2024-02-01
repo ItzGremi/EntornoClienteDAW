@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<body>
+    <script>
+      // geoModule.js
+      const geoModule = (function () {
+        /* Pedimos permisos de localización */
+        function askPermissions() {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              console.log('Permisos de geolocalización concedidos.');
+            },
+            (error) => {
+              console.error(`Error al obtener permisos de geolocalización: ${error.message}`);
+            }
+          );
+        }
+
+        /* Función para obtener la longitud */
+        function getLongitude() {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const longitude = position.coords.longitude;
+              console.log(`Longitud: ${longitude}`);
+            },
+            (error) => {
+              console.error(`Error al obtener la longitud: ${error.message}`);
+            }
+          );
+        }
+
+        /* Función para obtener la latitud */
+        function getLatitude() {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              console.log(`Latitud: ${latitude}`);
+            },
+            (error) => {
+              console.error(`Error al obtener la latitud: ${error.message}`);
+            }
+          );
+        }
+
+        /* Función para obtener la altitud */
+        function getAltitude() {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const altitude = position.coords.altitude;
+              console.log(`Altitud: ${altitude}`);
+            },
+            (error) => {
+              console.error(`Error al obtener la altitud: ${error.message}`);
+            }
+          );
+        }
+
+        return {
+          askPermissions,
+          getLongitude,
+          getLatitude,
+          getAltitude
+        };
+      })();
+
+      // Asigna el módulo a la variable geo
+      const geo = geoModule;
+
+      // Invoca las funciones del módulo
+      geo.askPermissions();
+      geo.getLongitude();
+      geo.getLatitude();
+      geo.getAltitude();
+    </script>
+</body>
+</html>
